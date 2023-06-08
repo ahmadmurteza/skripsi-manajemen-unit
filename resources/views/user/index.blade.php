@@ -40,7 +40,15 @@
                         <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $user->name }}</strong></td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->jabatan }}</td>
+                        @if ($user->role == 'ho')
                         <td><span class="badge bg-label-primary me-1">{{ $user->role }}</span></td>
+                        @elseif ($user->role == 'planner')
+                        <td><span class="badge bg-label-secondary me-1">{{ $user->role }}</span></td>
+                        @elseif ($user->role == 'mekanik')
+                        <td><span class="badge bg-label-danger me-1">{{ $user->role }}</span></td>
+                        @elseif ($user->role == 'operator')
+                        <td><span class="badge bg-label-warning me-1">{{ $user->role }}</span></td>
+                        @endif
                         <td>{{ $user->no_wa }}</td>
                         <td>
                         <div class="dropdown">
