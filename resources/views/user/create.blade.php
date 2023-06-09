@@ -53,6 +53,17 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label class="form-label" for="basic-default-company"
+                    >Lokasi</label
+                >
+                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="lokasi_id" required>
+                    <option selected="" disabled>Pilih Salah Satu</option>
+                    @foreach ($locations as $location)
+                    <option value="{{ $location->id }}">{{ $location->nama_lokasi }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
                 <label class="form-label" for="basic-default-fullname"
                     >Jabatan</label
                 >

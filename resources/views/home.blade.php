@@ -1,24 +1,24 @@
 @extends('layouts.layout')
 
+@section('style')
+    {{--  Map  --}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.css"
+    crossorigin="" />
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/MarkerCluster.Default.css"
+    crossorigin="" />
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-lg-8 mb-4 order-0">
-        <div class="card">
-            <div class="d-flex align-items-end row">
-                <div class="col-sm-7">
-                    <div class="card-body">
-                        <h5 class="card-title text-primary">Welcome to PT Balai Pustaka Site 🎉</h5>
-                        <p class="mb-4">
-                            Start uploading your books
-                        </p>
-
-                        <a href="javascript:;" class="btn btn-sm btn-outline-primary">Upload new book</a>
-                    </div>
-                </div>
-                <div class="col-sm-5 text-center text-sm-left">
-                    <div class="card-body pb-0 px-0 px-md-4">
-                        <img src="../assets/img/illustrations/man-with-laptop-light.png" height="140" alt="View Badge User" data-app-dark-img="illustrations/man-with-laptop-dark.png" data-app-light-img="illustrations/man-with-laptop-light.png" />
-                    </div>
+        <div class="row">
+            <div class="card mb-4">
+                <div class="card-header"><span class="fw-semibold d-block mb-1">Lokasi</span></div>
+                <div class="card-body">
+                    <div id="mapid" style="height: 500px;"></div>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span class="fw-semibold d-block mb-1">Users</span>
+                        <span class="fw-semibold d-block mb-1">Pengguna</span>
                         <h3 class="card-title mb-2">2000</h3>
 
                     </div>
@@ -57,15 +57,15 @@
                             </div>
                             <div class="dropdown">
                                 <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="bx bx-dots-vertical-rounded"></i>
-      </button>
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
                                     <a class="dropdown-item" href="javascript:void(0);">View More</a>
                                     <a class="dropdown-item" href="javascript:void(0);">Delete</a>
                                 </div>
                             </div>
                         </div>
-                        <span>Books</span>
+                        <span>Unit</span>
                         <h3 class="card-title text-nowrap mb-1">4,679</h3>
 
                     </div>
@@ -73,146 +73,109 @@
             </div>
         </div>
     </div>
-    <!-- Total Revenue -->
-    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-        <div class="card">
-            <div class="row row-bordered g-0">
-                <div class="col-md-8">
-                    <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                    <div id="totalRevenueChart" class="px-2"></div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-body">
-                        <div class="text-center">
-                            <div class="dropdown">
-                                <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="growthReportId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        2022
-      </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                    <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="growthChart"></div>
-                    <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
-
-                    <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                        <div class="d-flex">
-                            <div class="me-2">
-                                <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <small>2022</small>
-                                <h6 class="mb-0">$32.5k</h6>
-                            </div>
-                        </div>
-                        <div class="d-flex">
-                            <div class="me-2">
-                                <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                            </div>
-                            <div class="d-flex flex-column">
-                                <small>2021</small>
-                                <h6 class="mb-0">$41.2k</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ Total Revenue -->
-
-    <!-- Transactions -->
-    <div class="col-md-6 col-lg-4 order-2 mb-4">
-        <div class="card h-100">
-            <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2">Readed book</h5>
-                <div class="dropdown">
-                    <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  <i class="bx bx-dots-vertical-rounded"></i>
-</button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                        <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <ul class="p-0 m-0">
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <small class="text-muted d-block mb-1">Gunawan Sate</small>
-                                <h6 class="mb-0">1000 Kata Tuhan</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">12.00</h6>
-                                <span class="text-muted">AM</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <small class="text-muted d-block mb-1">Gunawan Sate</small>
-                                <h6 class="mb-0">1000 Kata Tuhan</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">12.00</h6>
-                                <span class="text-muted">AM</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <small class="text-muted d-block mb-1">Gunawan Sate</small>
-                                <h6 class="mb-0">1000 Kata Tuhan</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">12.00</h6>
-                                <span class="text-muted">AM</span>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                            <img src="../assets/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                                <small class="text-muted d-block mb-1">Gunawan Sate</small>
-                                <h6 class="mb-0">1000 Kata Tuhan</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                                <h6 class="mb-0">12.00</h6>
-                                <span class="text-muted">AM</span>
-                            </div>
-                        </div>
-                    </li>
-
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--/ Transactions -->
 
 </div>
+@endsection
+
+
+@section('script')
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.1/leaflet.markercluster.js"
+crossorigin=""></script>
+
+<script>
+        // Map BARU
+        var peta1 = L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/streets-v11'
+            });
+
+        var peta2 = L.tileLayer(
+            'https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                attribution: 'Map by <a href="https://maps.google.com/">Google</a>',
+                
+                subdomains:['mt0','mt1','mt2','mt3']
+            });
+
+
+        var peta3 = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+
+        var peta4 = L.tileLayer(
+            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                    '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                    'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                id: 'mapbox/dark-v10'
+            });
+
+        var mymap = L.map('mapid', {
+            center: [-3.724486016443786, 114.91149902343751],
+            zoom: 9,
+            layers: [peta2]
+        });
+
+        var baseMaps = {
+            "Default": peta2,
+            "OpenStreetMap": peta3,
+        };
+
+        var greenIcon = new L.Icon({
+            iconUrl: 'https://dev-aneka2.neuhost.co.id/icon/truck.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+        });
+
+        L.control.layers(baseMaps).addTo(mymap);
+
+        var progress = document.getElementById('progress');
+        var progressBar = document.getElementById('progress-bar');
+
+        function updateProgressBar(processed, total, elapsed, layersArray) {
+            if (elapsed > 1000) {
+                // if it takes more than a second to load, display the progress bar:
+                progress.style.display = 'block';
+                progressBar.style.width = Math.round(processed / total * 100) + '%';
+            }
+
+            if (processed === total) {
+                // all markers processed - hide the progress bar:
+                progress.style.display = 'none';
+            }
+        }
+
+        {{--  MARKER CLUSTER Group  --}}
+        var markers = L.markerClusterGroup({
+            spiderfyOnMaxZoom: false,
+            showCoverageOnHover: false,
+            zoomToBoundsOnClick: true,
+            chunkedLoading: true,
+            chunkProgress: updateProgressBar,
+            disableClusteringAtZoom: 16
+        });
+
+        var markerList = [];
+
+        // menampilkan data pada map
+        @foreach ($locations as $l)
+            var lokasi = L.circle([{{ $l->latitude }}, {{ $l->longitude }}], {
+                "radius": "{{ $l->radius }}",
+                "fillColor": "#ff7800",
+                "color": "#ff7800",
+                "weight": 1,
+                "opacity": 0.5,
+                "fillOpacity":0.5,
+                'strokeOpacity': 0.5
+            }).addTo(mymap).bindPopup("<b>Area : {{ $l->nama_lokasi }} </b>");
+        @endforeach
+
+</script>
 @endsection

@@ -49,11 +49,22 @@
                     >Role</label
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="role" required>
-                    <option selected="">Pilih Salah Satu</option>
-                    <option value="HO">HO</option>
-                    <option value="Planner">Planner</option>
-                    <option value="Mekanik">Mekanik</option>
-                    <option value="Operator">Operator</option>
+                    <option disabled>Pilih Salah Satu</option>
+                    <option value="ho"{{ $user->location == "ho" ? " selected" : "" }}>HO</option>
+                    <option value="planner"{{ $user->location == "planner" ? " selected" : "" }}>Planner</option>
+                    <option value="mekanik"{{ $user->location == "mekanik" ? " selected" : "" }}>Mekanik</option>
+                    <option value="operator"{{ $user->location == "operator" ? " selected" : "" }}>Operator</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-company"
+                    >Lokasi</label
+                >
+                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="lokasi_id" required>
+                    <option disabled>Pilih Salah Satu</option>
+                    @foreach ($locations as $location)
+                    <option value="{{ $location->id }}"{{ $user->lokasi_id == $location->id ? " selected" : "" }}>{{ $location->nama_lokasi }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="mb-3">

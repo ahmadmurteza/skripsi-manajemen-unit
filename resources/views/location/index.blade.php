@@ -8,9 +8,9 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
-                <h5 class="col-md-8">Table Pengguna</h5>
+                <h5 class="col-md-8">Table Lokasi</h5>
                 <div class="col-md-4 d-flex justify-content-end">
-                    <a href="{{ route('user.create') }}" type="button" class="btn btn-primary">
+                    <a href="{{ route('location.create') }}" type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Data
                     </a>
                 </div>
@@ -25,41 +25,29 @@
                     <thead>
                     <tr>
                         <th>NO</th>
-                        <th>Nama</th>
-                        <th>Lokasi</th>
-                        <th>Email</th>
-                        <th>Jabatan</th>
-                        <th>Role App</th>
-                        <th>No Whatsapp</th>
+                        <th>Nama Lokasi</th>
+                        <th>Radius</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                    @foreach ($users as $index => $user)
+                    @foreach ($locations as $index => $location)
                     <tr>
                         <td><strong>{{ $index +1 }}</strong></td>
-                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ ucfirst($user->name) }}</strong></td>
-                        <td>{{ $user->nama_lokasi }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->jabatan }}</td>
-                        @if ($user->role == 'ho')
-                        <td><span class="badge bg-label-primary me-1">{{ $user->role }}</span></td>
-                        @elseif ($user->role == 'planner')
-                        <td><span class="badge bg-label-secondary me-1">{{ $user->role }}</span></td>
-                        @elseif ($user->role == 'mekanik')
-                        <td><span class="badge bg-label-danger me-1">{{ $user->role }}</span></td>
-                        @elseif ($user->role == 'operator')
-                        <td><span class="badge bg-label-warning me-1">{{ $user->role }}</span></td>
-                        @endif
-                        <td>{{ $user->no_wa }}</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{ $location->nama_lokasi }}</strong></td>
+                        <td>{{ $location->radius }} Meter</td>
+                        <td>{{ $location->longitude }}</td>
+                        <td>{{ $location->latitude }}</td>
                         <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                             <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('user.edit', $user->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                            <form action="{{ route('user.delete', $user->id) }}" method="POST">
+                            <a class="dropdown-item" href="{{ route('location.edit', $location->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                            <form action="{{ route('location.delete', $location->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i> Delete</button>

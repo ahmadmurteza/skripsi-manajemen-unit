@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Location;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index() {
-        $users = User::all();
+        $users = User::join('lokasi', 'users.lokasi_id', '=', 'lokasi.id')->select('users.*', 'lokasi.nama_lokasi')->get();
         return view('user.index', compact('users'));
     }
 
     public function create() {
-        return view('user.create');
+        $locations = Location::all();
+        return view('user.create', compact('locations'));
     }
 
     public function store(Request $request) {
         User::create([
+            'lokasi_id' => $request->lokasi_id,
             'name' => $request->name,
             'email' => $request->email,
             'jabatan' => $request->jabatan,
@@ -32,11 +35,13 @@ class UserController extends Controller
 
     public function edit($id) {
         $user = User::find($id);
-        return view('user.edit', compact('user'));
+        $locations = Location::all();
+        return view('user.edit', compact('user', 'locations'));
     }
 
     public function update(Request $request, $id) {
         $user = User::find($id);
+        $user->lokasi_id = $request->lokasi_id;
         $user->name = $request->name;
         $user->email = $request->email;
         $user->jabatan = $request->jabatan;

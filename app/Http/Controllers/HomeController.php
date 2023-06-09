@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Location;
+
 class HomeController extends Controller
 {
     public function __construct()
@@ -13,6 +15,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        $locations = Location::all();
+        return view('home', compact('locations'));
     }
 }

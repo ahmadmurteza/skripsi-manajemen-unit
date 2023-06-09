@@ -123,7 +123,7 @@
 
                 <ul class="menu-inner py-1">
                     <li class="menu-item{{ (request()->is('home')) ? ' active' : '' }}">
-                        <a href="index.html" class="menu-link">
+                        <a href="{{ route('home') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
@@ -133,6 +133,13 @@
                         <a href="{{ route('user') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-circle"></i>
                             <div data-i18n="Analytics">Manajemen User</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item{{ Request::is('location/*') || Request::is('location') ? ' active' : '' }}">
+                        <a href="{{ route('location') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-current-location"></i>
+                            <div data-i18n="Analytics">Manajemen Lokasi</div>
                         </a>
                     </li>
                     
