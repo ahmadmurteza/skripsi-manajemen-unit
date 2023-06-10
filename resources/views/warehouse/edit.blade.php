@@ -11,6 +11,7 @@
 @endsection
 
 @section('content')
+
 <div class="row">
     <div class="col-8">
         <div class="card">
@@ -26,8 +27,9 @@
                 <h5 class="mb-0">Tambah Data</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('location.store') }}" method="post" enctype="multipart/form-data" >
+                <form action="{{ route('warehouse.update', $warehouse->id ) }}" method="post" enctype="multipart/form-data" >
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname"
                             >Nama Lokasi</label
@@ -37,26 +39,14 @@
                             class="form-control"
                             id="basic-default-fullname"
                             placeholder="PIT A, PIT B, PIT C, ..."
-                            name="nama_lokasi"
-                            required
-                        />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname"
-                            >Radius (Meter)</label
-                        >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="radius"
-                            placeholder="10000, 20000, .."
-                            name="radius"
+                            name="nama_gudang"
+                            value="{{ $warehouse->nama_gudang }}"
                             required
                         />
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-email"
-                            >Longtitude</label
+                            >Longitude</label
                         >
                         <div class="input-group input-group-merge">
                             <input
@@ -67,6 +57,7 @@
                                 aria-label="john.doe"
                                 aria-describedby="basic-default-email2"
                                 name="longitude"
+                                value="{{ $warehouse->longitude }}"
                                 required
                             />
                         </div>
@@ -81,6 +72,7 @@
                             id="latitude"
                             placeholder="114.810xxx"
                             name="latitude"
+                            value="{{ $warehouse->latitude }}"
                             required
                         />
                     </div>
@@ -91,9 +83,10 @@
                         <input
                             type="text"
                             class="form-control"
-                            id="pemilik"
+                            id="penanggung_jawab"
                             placeholder="Perusahaan, Nama orang, ..."
-                            name="pemilik"
+                            name="penanggung_jawab"
+                            value="{{ $warehouse->penanggung_jawab }}"
                             required
                         />
                     </div>
@@ -101,9 +94,9 @@
                         <label class="form-label" for="basic-default-fullname"
                             >Deskripsi</label
                         >
-                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control"></textarea>
+                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control">{{ $warehouse->deskripsi }}</textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
         </div>
@@ -120,10 +113,10 @@ crossorigin=""></script>
 <script>
     var curLocation = [0, 0];
     if (curLocation[0] == 0 && curLocation[1] == 0) {
-        curLocation = [-3.724486016443786, 114.91149902343751];
+        curLocation = [{{$warehouse->latitude}}, {{$warehouse->longitude}}];
     }
 
-    var map = L.map('mapid').setView([-3.724486016443786, 114.91149902343751], 15);
+    var map = L.map('mapid').setView([{{$warehouse->latitude}}, {{$warehouse->longitude}}], 15);
 
     L.tileLayer(
         'https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {

@@ -26,7 +26,7 @@
                 <h5 class="mb-0">Tambah Data</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('location.store') }}" method="post" enctype="multipart/form-data" >
+                <form action="{{ route('warehouse.store') }}" method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="basic-default-fullname"
@@ -36,21 +36,8 @@
                             type="text"
                             class="form-control"
                             id="basic-default-fullname"
-                            placeholder="PIT A, PIT B, PIT C, ..."
+                            placeholder="GUDANG A, GUDANG B, ..."
                             name="nama_lokasi"
-                            required
-                        />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname"
-                            >Radius (Meter)</label
-                        >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="radius"
-                            placeholder="10000, 20000, .."
-                            name="radius"
                             required
                         />
                     </div>
@@ -91,9 +78,9 @@
                         <input
                             type="text"
                             class="form-control"
-                            id="pemilik"
+                            id="penanggung_jawab"
                             placeholder="Perusahaan, Nama orang, ..."
-                            name="pemilik"
+                            name="penanggung_jawab"
                             required
                         />
                     </div>

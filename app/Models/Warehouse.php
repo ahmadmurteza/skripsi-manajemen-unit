@@ -5,18 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Location extends Model
+class Warehouse extends Model
 {
     use HasFactory;
 
-    protected $table = 'lokasi';
+    protected $table = 'gudang_sparepart';
 
     protected $fillable = [
-        'nama_lokasi',
-        'pemilik',
+        'nama_gudang',
+        'penanggung_jawab',
         'deskripsi',
+        'nama_gudang',
         'longitude',
         'latitude',
-        'radius',
     ];
 }

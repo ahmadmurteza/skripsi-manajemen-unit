@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Location;
 
-class LocationController extends Controller
+use App\Models\Sparepart;
+
+class SparepartController extends Controller
 {
     public function index() {
         $locations = Location::all();
@@ -23,8 +25,6 @@ class LocationController extends Controller
             'longitude' => $request->longitude,
             'latitude' => $request->latitude,
             'radius' => $request->radius,
-            'pemilik' => $request->pemilik,
-            'deskripsi' => $request->radius,
         ]);
 
         return redirect()->route('location')->with('success', 'Berhasil menambah lokasi baru');
@@ -41,8 +41,6 @@ class LocationController extends Controller
         $location->radius = $request->radius;
         $location->longitude = $request->longitude;
         $location->latitude = $request->latitude;
-        $location->pemilik = $request->pemilik;
-        $location->deskripsi = $request->deskripsi;
 
         $location->save();
 

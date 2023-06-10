@@ -145,25 +145,25 @@
                     
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Book Management</div>
+                            <i class="menu-icon tf-icons bx bx-wrench"></i>
+                            <div data-i18n="Layouts">Manajemen Sparepart</div>
                         </a>
                         
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Manajemen Pengguna</div>
+                                <a href="{{ route('warehouse') }}" class="menu-link">
+                                    <div data-i18n="Without menu">Gudang Sparepart</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Manajemen User</div>
+                                <a href="{{ route('sparepart-beli') }}" class="menu-link">
+                                    <div data-i18n="Without navbar">Pembelian Sparepart</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Manajemen </div>
+                                <a href="{{ route('sparepart-pakai') }}" class="menu-link">
+                                    <div data-i18n="Container">Penggunaan Sparepart</div>
                                 </a>
                             </li>
 
@@ -173,18 +173,23 @@
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Users Management</div>
+                            <div data-i18n="Layouts">Manajemen Unit</div>
                         </a>
 
                         <ul class="menu-sub">
                             <li class="menu-item">
                                 <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Users</div>
+                                    <div data-i18n="Without menu">Daftar Unit</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="layouts-without-menu.html" class="menu-link">
+                                    <div data-i18n="Without menu">Laporan Kerusakan</div>
                                 </a>
                             </li>
                             <li class="menu-item">
                                 <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Admins</div>
+                                    <div data-i18n="Without navbar">Service Berkala</div>
                                 </a>
                             </li>
                         </ul>

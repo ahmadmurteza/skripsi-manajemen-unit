@@ -1,0 +1,81 @@
+@extends('layouts.layout') 
+@section('content')
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Edit Data</h5>
+    </div>
+    <div class="card-body">
+        @if (Session::has('danger'))
+            <div class="alert alert-danger">{{ Session::get('danger') }}</div>
+        @endif
+        <form action="{{ route('sparepart-pakai.update', $sparepart->id) }}" method="post" enctype="multipart/form-data" >
+            @csrf
+            @method('PUT')
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-company"
+                    >Sparepart</label
+                >
+                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="sparepart_beli_id" required>
+                    <option selected="" disabled>Pilih Salah Satu</option>
+                    @foreach ($sparepartBeli as $sp)
+                    <option value="{{ $sp->id }}"{{ $sparepart->sparepart_beli_id == $sp->id ? " selected" : "" }}>{{ $sp->deskripsi }} ({{ $sp->nomor_part }} || {{ $sp->nomor_po }})</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-fullname"
+                    >Tanggal Dipakai</label
+                >
+                <input
+                    type="date"
+                    class="form-control"
+                    id="basic-default-fullname"
+                    name="tanggal_dipakai"
+                    value="{{ $sparepart->tanggal_dipakai }}"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-fullname"
+                    >Jumlah</label
+                >
+                <input
+                    type="number"
+                    class="form-control"
+                    id="basic-default-fullname"
+                    placeholder="10, 200, 300, ..."
+                    name="jumlah"
+                    value="{{ $sparepart->jumlah }}"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-fullname"
+                    >Penerima</label
+                >
+                <input
+                    type="text"
+                    class="form-control"
+                    id="basic-default-fullname"
+                    placeholder="Jhon, Doe, ..."
+                    name="penerima"
+                    value="{{ $sparepart->penerima }}"
+                    required
+                />
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="basic-default-company"
+                    >Status</label
+                >
+                <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="status" required>
+                    <option selected disabled>Pilih Salah Satu</option>
+                    <option value="dipasang"{{ $sparepart->status == "dipasang" ? " selected" : "" }}>Dipasang</option>
+                    <option value="disimpan"{{ $sparepart->status == "disimpan" ? " selected" : "" }}>Disimpan</option>                   
+                    <option value="proses"{{ $sparepart->status == "proses" ? " selected" : "" }}>Proses</option>                   
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </form>
+    </div>
+</div>
+@endsection

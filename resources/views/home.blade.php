@@ -115,8 +115,8 @@ crossorigin=""></script>
             });
 
         var mymap = L.map('mapid', {
-            center: [-3.724486016443786, 114.91149902343751],
-            zoom: 9,
+            center: [-3.882066623633622, 114.83184814453126],
+            zoom: 10,
             layers: [peta2]
         });
 
@@ -126,9 +126,9 @@ crossorigin=""></script>
         };
 
         var greenIcon = new L.Icon({
-            iconUrl: 'https://dev-aneka2.neuhost.co.id/icon/truck.png',
+            iconUrl: '/icons/warehouse.png',
             shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-            iconSize: [25, 41],
+            iconSize: [25, 25],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
             shadowSize: [41, 41]
@@ -159,7 +159,7 @@ crossorigin=""></script>
             zoomToBoundsOnClick: true,
             chunkedLoading: true,
             chunkProgress: updateProgressBar,
-            disableClusteringAtZoom: 16
+            disableClusteringAtZoom: 20
         });
 
         var markerList = [];
@@ -177,5 +177,16 @@ crossorigin=""></script>
             }).addTo(mymap).bindPopup("<b>Area : {{ $l->nama_lokasi }} </b>");
         @endforeach
 
+        @foreach ($warehouses as $warehouse)
+            var lokasi = L.circle([{{ $warehouse->latitude }}, {{ $warehouse->longitude }}], {
+                "radius": "1000",
+                "fillColor": "#8bca84",
+                "color": "#8bca84",
+                "weight": 1,
+                "opacity": 0.5,
+                "fillOpacity":0.5,
+                'strokeOpacity': 0.5
+            }).addTo(mymap).bindPopup("<b>Area : {{ $warehouse->nama_gudang }} </b>");
+        @endforeach
 </script>
 @endsection

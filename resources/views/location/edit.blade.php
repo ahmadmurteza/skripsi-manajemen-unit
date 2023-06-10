@@ -45,20 +45,6 @@
                         />
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="basic-default-fullname"
-                            >Radius (Meter)</label
-                        >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="radius"
-                            placeholder="10000, 20000, .."
-                            name="radius"
-                            value="{{ $location->radius }}"
-                            required
-                        />
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label" for="basic-default-email"
                             >Longitude</label
                         >
@@ -90,7 +76,27 @@
                             required
                         />
                     </div>
-                    <button type="submit" class="btn btn-primary">Tambah</button>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname"
+                            >Pemilik</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="pemilik"
+                            placeholder="Perusahaan, Nama orang, ..."
+                            name="pemilik"
+                            value="{{ $location->pemilik }}"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname"
+                            >Deskripsi</label
+                        >
+                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control">{{ $location->deskripsi }}</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
         </div>
