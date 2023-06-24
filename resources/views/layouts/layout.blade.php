@@ -178,7 +178,7 @@
 
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
+                                <a href="{{ route('unit') }}" class="menu-link">
                                     <div data-i18n="Without menu">Daftar Unit</div>
                                 </a>
                             </li>
@@ -188,7 +188,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
+                                <a href="{{ route('service') }}" class="menu-link">
                                     <div data-i18n="Without navbar">Service Berkala</div>
                                 </a>
                             </li>

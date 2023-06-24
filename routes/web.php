@@ -65,9 +65,17 @@ Route::put('/sparepart-pakai/update/{id}', [App\Http\Controllers\SparepartPakaiC
 Route::delete('/sparepart-pakai/delete/{id}', [App\Http\Controllers\SparepartPakaiController::class, 'delete'])->name('sparepart-pakai.delete');
 
 // Service Berkala
-Route::get('/service', [App\Http\Controllers\SparepartPakaiController::class, 'index'])->name('service');
-Route::get('/service/create', [App\Http\Controllers\SparepartPakaiController::class, 'create'])->name('service.create');
-Route::post('/service/store', [App\Http\Controllers\SparepartPakaiController::class, 'store'])->name('service.store');
-Route::get('/service/edit/{id}', [App\Http\Controllers\SparepartPakaiController::class, 'edit'])->name('service.edit');
-Route::put('/service/update/{id}', [App\Http\Controllers\SparepartPakaiController::class, 'update'])->name('service.update');
-Route::delete('/service/delete/{id}', [App\Http\Controllers\SparepartPakaiController::class, 'delete'])->name('sparepart-pakai.delete');
+Route::get('/service', [App\Http\Controllers\ServiceController::class, 'index'])->name('service');
+Route::get('/service/create', [App\Http\Controllers\ServiceController::class, 'create'])->name('service.create');
+Route::post('/service/store', [App\Http\Controllers\ServiceController::class, 'store'])->name('service.store');
+Route::get('/service/edit/{id}', [App\Http\Controllers\ServiceController::class, 'edit'])->name('service.edit');
+Route::put('/service/update/{id}', [App\Http\Controllers\ServiceController::class, 'update'])->name('service.update');
+Route::delete('/service/delete/{id}', [App\Http\Controllers\ServiceController::class, 'delete'])->name('service.delete');
+
+// Master Unit
+Route::get('/unit', [App\Http\Controllers\MasterUnitController::class, 'index'])->name('unit');
+Route::get('/unit/create', [App\Http\Controllers\MasterUnitController::class, 'create'])->name('unit.create');
+Route::post('/unit/store', [App\Http\Controllers\MasterUnitController::class, 'store'])->name('unit.store');
+Route::get('/unit/edit/{id}', [App\Http\Controllers\MasterUnitController::class, 'edit'])->name('unit.edit');
+Route::put('/unit/update/{id}', [App\Http\Controllers\MasterUnitController::class, 'update'])->name('unit.update');
+Route::delete('/unit/delete/{id}', [App\Http\Controllers\MasterUnitController::class, 'delete'])->name('unit.delete');
