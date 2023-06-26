@@ -183,7 +183,7 @@
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
+                                <a href="{{ route('report') }}" class="menu-link">
                                     <div data-i18n="Without menu">Laporan Kerusakan</div>
                                 </a>
                             </li>

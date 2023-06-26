@@ -17,10 +17,10 @@
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="jenis_unit" required>
                     <option selected disabled>Pilih Salah Satu</option>
-                    <option value="dozer">Dozer</option>
-                    <option value="exavator">Exavator</option>                   
-                    <option value="buldozer">Bulldozer</option>                   
-                    <option value="grader">Grader</option>                   
+                    <option value="dozer"{{ $unit->jenis_unit == 'dozer' ? ' selected' : '' }}>Dozer</option>
+                    <option value="exavator"{{ $unit->jenis_unit == 'excavator' ? ' selected' : '' }}>Exavator</option>                   
+                    <option value="buldozer"{{ $unit->jenis_unit == 'buldozer' ? ' selected' : '' }}>Bulldozer</option>                   
+                    <option value="grader"{{ $unit->jenis_unit == 'grader' ? ' selected' : '' }}>Grader</option>                   
                 </select>
             </div>
             <div class="mb-3">
@@ -111,7 +111,7 @@
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="lokasi_id" required>
                     <option selected disabled>Pilih Salah Satu</option>
                     @foreach ($locations as $location)
-                        <option value="{{ $location->id }}"{{ $unit->lokasi_id == $locatioan->id ? ' selected' : '' }}>{{ $location->nama_lokasi }}</option>                          
+                        <option value="{{ $location->id }}"{{ $unit->lokasi_id == $location->id ? ' selected' : '' }}>{{ $location->nama_lokasi }}</option>                          
                     @endforeach
                 </select>
             </div>
@@ -122,7 +122,7 @@
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="hm_service_id" required>
                     <option selected disabled>Pilih Salah Satu</option>
                     @foreach ($services as $service)
-                        <option value="{{ $service->id }}">{{ $service->deskripsi }} - {{ $service->hm }}HM</option>                          
+                        <option value="{{ $service->id }}"{{ $unit->hm_service_id == $service->id ? ' selected' : '' }}>{{ $service->deskripsi }} - {{ $service->hm }}HM</option>                          
                     @endforeach
                 </select>
             </div>

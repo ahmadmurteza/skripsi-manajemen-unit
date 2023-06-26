@@ -21,7 +21,7 @@ class MasterUnitController extends Controller
         ->get();
 
 
-        return view('master_unit.index', compact('units'));
+        return view('report.index', compact('units'));
     }
 
     public function create() {
@@ -54,21 +54,24 @@ class MasterUnitController extends Controller
     }
 
     public function update(Request $request, $id) {
-        $service = Service::find($id);
+        $unit = MasterUnit::find($id);
 
-        $service->penanggung_jawab = $request->penanggung_jawab;
-        $service->deskripsi = $request->deskripsi;
-        $service->sparepart = $request->sparepart;
-        $service->hm = $request->hm;
-        $service->jenis_unit = $request->jenis_unit;
+        $unit->jenis_unit = $request->jenis_unit;
+        $unit->aset = $request->aset;
+        $unit->nomer_serial = $request->nomer_serial;
+        $unit->nomer_lambung = $request->nomer_lambung;
+        $unit->status = $request->status;
+        $unit->keterangan = $request->keterangan;
+        $unit->lokasi_id = $request->lokasi_id;
+        $unit->hm = $request->hm;
+        $unit->hm_service_id = $request->hm_service_id;
+        $unit->save();
 
-        $service->save();
-
-        return redirect()->route('service')->with('success', 'Berhasil memperbaharui service');
+        return redirect()->route('unit')->with('success', 'Berhasil memperbaharui unit');
     }
 
     public function delete($id) {
-        Service::find($id)->delete();
-        return redirect()->route('service')->with('success', 'Berhasil menghapus service');
+        MasterUnit::find($id)->delete();
+        return redirect()->route('unit')->with('success', 'Berhasil menghapus unit');
     }
 }

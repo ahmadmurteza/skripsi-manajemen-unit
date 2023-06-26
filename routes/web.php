@@ -79,3 +79,11 @@ Route::post('/unit/store', [App\Http\Controllers\MasterUnitController::class, 's
 Route::get('/unit/edit/{id}', [App\Http\Controllers\MasterUnitController::class, 'edit'])->name('unit.edit');
 Route::put('/unit/update/{id}', [App\Http\Controllers\MasterUnitController::class, 'update'])->name('unit.update');
 Route::delete('/unit/delete/{id}', [App\Http\Controllers\MasterUnitController::class, 'delete'])->name('unit.delete');
+
+// Report
+Route::get('/report', [App\Http\Controllers\ReportController::class, 'index'])->name('report');
+Route::get('/report/create', [App\Http\Controllers\ReportController::class, 'create'])->name('report.create');
+Route::post('/report/store', [App\Http\Controllers\ReportController::class, 'store'])->name('report.store');
+Route::get('/report/edit/{id}', [App\Http\Controllers\ReportController::class, 'edit'])->name('report.edit');
+Route::put('/report/update/{id}', [App\Http\Controllers\ReportController::class, 'update'])->name('report.update');
+Route::delete('/report/delete/{id}', [App\Http\Controllers\ReportController::class, 'delete'])->name('report.delete');
