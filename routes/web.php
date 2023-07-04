@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 
 route::get('/update-location', [App\Http\Controllers\HomeController::class, 'location'])->name('unit.update.location');
+route::post('/incident', [App\Http\Controllers\HomeController::class, 'incident'])->name('incident.store');
 
 Auth::routes();
 

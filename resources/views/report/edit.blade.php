@@ -30,7 +30,7 @@
                     >Unit</label
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="master_unit_id" required>
-                    <option selected disabled>Pilih Salah Satu</option>
+                    <option value="" selected disabled>Pilih Salah Satu</option>
                     @foreach ($units as $unit)
                         <option value="{{ $unit->id }}"{{ $unit->id == $report->master_unit_id ? ' selected' : '' }}>{{ $unit->nomer_lambung }}</option>                          
                     @endforeach
@@ -41,7 +41,7 @@
                     >Lokasi</label
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="lokasi_id" required>
-                    <option selected disabled>Pilih Salah Satu</option>
+                    <option value="" selected disabled>Pilih Salah Satu</option>
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}"{{ $location->id == $report->lokasi_id ? ' selected' : '' }}>{{ $location->nama_lokasi }}</option>                          
                     @endforeach

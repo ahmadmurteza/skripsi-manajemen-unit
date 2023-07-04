@@ -43,7 +43,7 @@
                             </div>
                         </div>
                         <span class="fw-semibold d-block mb-1">Pengguna</span>
-                        <h3 class="card-title mb-2">2000</h3>
+                        <h3 class="card-title mb-2">{{ $userTotal }}</h3>
 
                     </div>
                 </div>
@@ -126,8 +126,7 @@ crossorigin=""></script>
         };
 
         var greenIcon = new L.Icon({
-            iconUrl: '/icons/warehouse.png',
-            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconUrl: '/icons/car-accident.png',
             iconSize: [25, 25],
             iconAnchor: [12, 41],
             popupAnchor: [1, -34],
@@ -152,7 +151,6 @@ crossorigin=""></script>
             }
         }
 
-        {{--  MARKER CLUSTER Group  --}}
         var markers = L.markerClusterGroup({
             spiderfyOnMaxZoom: false,
             showCoverageOnHover: false,
@@ -188,5 +186,14 @@ crossorigin=""></script>
                 'strokeOpacity': 0.5
             }).addTo(mymap).bindPopup("<b>Area : {{ $warehouse->nama_gudang }} </b>");
         @endforeach
+
+        @foreach ($units as $unit)
+            @if ($unit->latitude != null && $unit->longitude != null)
+                var lokasi = L.marker([{{ $unit->latitude }}, {{ $unit->longitude }}], {
+                    icon: greenIcon
+                }).addTo(mymap).bindPopup("<b>Nomor Lambung : {{ $unit->nomer_lambung }} </b>");
+            @endif
+        @endforeach
+
 </script>
 @endsection

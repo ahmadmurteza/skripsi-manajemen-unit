@@ -63,7 +63,7 @@
                             <span class="badge bg-secondary">{{ $report->status }}</span>
                             @endif
                         </td>
-                        <td><img src="{{ url($report->foto_insiden) }}" width="100" height="100"></td>
+                        <td><img src="{{ asset("storage/" . substr($report->foto_insiden, 7)) }}" width="100" height="100"></td>
                         <td>
                         <div class="dropdown">
                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

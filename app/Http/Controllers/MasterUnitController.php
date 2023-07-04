@@ -21,7 +21,7 @@ class MasterUnitController extends Controller
         ->get();
 
 
-        return view('report.index', compact('units'));
+        return view('master_unit.index', compact('units'));
     }
 
     public function create() {
