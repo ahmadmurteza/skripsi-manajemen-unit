@@ -88,3 +88,17 @@ Route::post('/report/store', [App\Http\Controllers\ReportController::class, 'sto
 Route::get('/report/edit/{id}', [App\Http\Controllers\ReportController::class, 'edit'])->name('report.edit');
 Route::put('/report/update/{id}', [App\Http\Controllers\ReportController::class, 'update'])->name('report.update');
 Route::delete('/report/delete/{id}', [App\Http\Controllers\ReportController::class, 'delete'])->name('report.delete');
+Route::post('/report/priority', [App\Http\Controllers\ReportController::class, 'priority'])->name('report.priority');
+
+// Pemberitahuan
+Route::get('/announcement', [App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcement');
+// Cetak
+Route::get('/pdf', [App\Http\Controllers\PdfController::class, 'index'])->name('pdf');
+Route::get('/pdf/unit', [App\Http\Controllers\PdfController::class, 'printUnit'])->name('pdf.unit');
+Route::get('/pdf/service', [App\Http\Controllers\PdfController::class, 'printService'])->name('pdf.service');
+Route::get('/pdf/user', [App\Http\Controllers\PdfController::class, 'printUser'])->name('pdf.user');
+Route::get('/pdf/location', [App\Http\Controllers\PdfController::class, 'printLokasi'])->name('pdf.location');
+Route::get('/pdf/warehouse', [App\Http\Controllers\PdfController::class, 'printGudang'])->name('pdf.warehouse');
+Route::get('/pdf/pembelian', [App\Http\Controllers\PdfController::class, 'printPembelian'])->name('pdf.pembelian');
+Route::get('/pdf/penggunaan', [App\Http\Controllers\PdfController::class, 'printPenggunaan'])->name('pdf.penggunaan');
+Route::get('/pdf/rusak', [App\Http\Controllers\PdfController::class, 'printRusak'])->name('pdf.rusak');

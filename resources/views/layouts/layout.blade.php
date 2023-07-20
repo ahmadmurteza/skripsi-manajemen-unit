@@ -129,6 +129,13 @@
                         </a>
                     </li>
 
+                    <li class="menu-item{{ (request()->is('announcement')) ? ' active' : '' }}">
+                        <a href="{{ route('announcement') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-label"></i>
+                            <div data-i18n="Analytics">Pemberitahuan</div>
+                        </a>
+                    </li>
+
                     <li class="menu-item{{ Request::is('user/*') || Request::is('user') ? ' active' : '' }}">
                         <a href="{{ route('user') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-user-circle"></i>
@@ -195,6 +202,13 @@
                         </ul>
                     </li>
 
+
+                    <li class="menu-item{{ (request()->is('pdf')) ? ' active' : '' }}">
+                        <a href="{{ route('pdf') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-file"></i>
+                            <div data-i18n="Analytics">Cetak</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->

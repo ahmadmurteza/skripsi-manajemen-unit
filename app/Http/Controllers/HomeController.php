@@ -9,6 +9,7 @@ use App\Models\MasterUnit;
 use App\Models\Warehouse;
 use App\Models\User;
 use App\Models\Report;
+use App\Models\Announcement;
 
 use Illuminate\Support\Facades\Http;
 
@@ -63,12 +64,17 @@ class HomeController extends Controller
         $unit->save();
 
         $users = User::where('role', 'planner')->get();
-        foreach ($users as $user) {
-            Http::post('http://localhost:8080/message', [
-                'phoneNumber' => $user->no_wa,
-                'message' => 'Laporan kerusakan unit '. $unit->nomer_lambung . '. Cek APUR untuk melihat detail kerusakan'
-            ]);
-        }
+        // foreach ($users as $user) {
+        //     Http::post('http://localhost:8080/message', [
+        //         'phoneNumber' => $user->no_wa,
+        //         'message' => 'Laporan kerusakan unit '. $unit->nomer_lambung . '. Cek APUR untuk melihat detail kerusakan'
+        //     ]);
+        // }
+
+        Announcement::create([
+            "deskripsi" => "Pemberitahuan unit ". $unit->nomer_lambung ." dengan kerusakan ". $request->kerusakan ."telah dikirim kesemua planner"
+        ]);
+
 
         return redirect()->back()->with('success', 'Laporan telah dikirimkan ke planner');
     }

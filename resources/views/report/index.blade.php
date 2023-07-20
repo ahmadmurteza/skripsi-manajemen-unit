@@ -46,13 +46,12 @@
                         <td>{{ $report->pengadu }}</td>
                         <td>{{ $report->kerusakan }}</td>
                         <td>
-                            @if ($report->prioritas == 'rendah')
-                            <span class="badge bg-primary">{{ $report->prioritas }}</span>
-                            @elseif($report->prioritas == 'sedang')
-                            <span class="badge bg-warning">{{ $report->prioritas }}</span>
-                            @else
-                            <span class="badge bg-danger">{{ $report->prioritas }}</span>
-                            @endif
+                            <select class="form-select" aria-label="Default select example" onchange="changePriority({{ $report->id }})" id="priority{{ $report->id }}">
+                                <option value="rendah"{{ $report->prioritas == "rendah" ? ' selected' : '' }}>rendah</option>
+                                <option value="sedang"{{ $report->prioritas == "sedang" ? ' selected' : '' }}>sedang</option>
+                                <option value="tinggi"{{ $report->prioritas == "tinggi" ? ' selected' : '' }}>tinggi</option>
+                            </select>
+                            <p style="visibility: hidden;">ssssssssssssssss</p>
                         </td>
                         <td>
                             @if ($report->status == 'selesai')
@@ -87,13 +86,36 @@
             </div>
         </div>
   </div>
+  <script>
+   
+    function changePriority(id) {
+        status = $('priority'+id).val();
+        alert('priority'+id)
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({ 
+           type: "POST", 
+           url: "{{route('report.priority')}}",               
+           data:{id:id, status: status},
+           success: function(result) {
+            console.log('donde');
+           }
+       });
+    }
+  </script>
 @endsection
 
 @section('script')
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+
 <script>
     $(document).ready(function(){
 		$('#table').DataTable();
+
+        
 	});
 </script>
 @endsection

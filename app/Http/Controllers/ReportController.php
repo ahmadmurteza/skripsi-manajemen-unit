@@ -96,4 +96,11 @@ class ReportController extends Controller
         Report::find($id)->delete();
         return redirect()->route('report')->with('success', 'Berhasil menghapus report');
     }
+
+    public function priority(Request $request) {
+        $report = Report::find($request->id);
+        $report->status = $request->status;
+        $report->save();
+        return $report;
+    }
 }
