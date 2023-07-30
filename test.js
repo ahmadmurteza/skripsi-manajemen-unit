@@ -383,22 +383,135 @@
 //   const numberOfGroups = getNumberOfGroups(predators);
 //   console.log(numberOfGroups);
 
+// class DepthTracker {
+//   constructor(nodes) {
+//     this.Nodes = nodes;
+//     this.Depth = new Array(nodes.length).fill(0);
 
-const books = [
-  { title: 'The Da Vinci Code', author: 'Dan Brown', sales: 5094805 },
-  { title: 'The Ghost', author: 'Robert Harris', sales: 807311 },
-  { title: 'White Teeth', author: 'Zadie Smith', sales: 815586 },
-  { title: 'Fifty Shades of Grey', author: 'E. L. James', sales: 3758936 },
-  { title: 'Jamie\'s Italy', author: 'Jamie Oliver', sales: 906968 },
-  { title: 'I Can Make You Thin', author: 'Paul McKenna', sales: 905086 },
-  { title: 'Harry Potter and the Deathly Hallows', author: 'J.K Rowling', sales: 4475152 },
-];
+//     for (let i = 0; i < nodes.length; i++) {
+//       if (nodes[i] > -1 && this.Depth[i] === 0) {
+//         this.Depth[i] = this.checkDepth(i);
+//       }
+//     }
+//   }
 
-let greatAuthors = books.filter(item => {
-  return item.sales > 1000000;
-}).map(item => {
-  return `${item.author} adalah penulis buku ${item.title} yang sangat hebat!`;
-});
+//   checkDepth(index) {
+//     if (index === -1) return 0;
+//     if (this.Depth[index] > 0) return this.Depth[index];
+
+//     const nextIdx = this.Nodes[index];
+//     if (nextIdx === -1) {
+//       this.Depth[index] = 0;
+//       return 0;
+//     }
+
+//     const thisDepth = this.checkDepth(nextIdx) + 1;
+//     this.Depth[index] = thisDepth;
+//     return thisDepth;
+//   }
+
+//   getHeight() {
+//     return Math.max(...this.Depth);
+//   }
+// }
+
+// function getTreeHeight(nodes) {
+//   const dt = new DepthTracker(nodes);
+//   return dt.getHeight() + 1;
+// }
+
+// const l = [-1, 0, 1];
+// console.log(getTreeHeight(l));
 
 
-console.log(greatAuthors);
+// function checkDepth(nodes, depth, index) {
+//   if (index === -1) return 0;
+//   if (depth[index] > 0) return depth[index];
+
+//   const nextIdx = nodes[index];
+//   if (nextIdx === -1) {
+//     depth[index] = 0;
+//     return 0;
+//   }
+
+//   const thisDepth = checkDepth(nodes, depth, nextIdx) + 1;
+//   depth[index] = thisDepth;
+//   return thisDepth;
+// }
+
+// function getTreeHeight(nodes) {
+//   const depth = new Array(nodes.length).fill(0);
+
+//   for (let i = 0; i < nodes.length; i++) {
+//     if (nodes[i] > -1 && depth[i] === 0) {
+//       depth[i] = checkDepth(nodes, depth, i);
+//     }
+//   }
+
+//   return Math.max(...depth) + 1;
+// }
+
+// const l = [-1, 0, 1];
+// console.log(getTreeHeight(l));
+
+
+function getTreeHeight(nodes) {
+  const depth = new Array(nodes.length).fill(0);
+
+  function checkDepth(index) {
+    if (index === -1) return 0;
+    if (depth[index] > 0) return depth[index];
+
+    const nextIdx = nodes[index];
+    if (nextIdx === -1) {
+      depth[index] = 0;
+      return 0;
+    }
+
+    const thisDepth = checkDepth(nextIdx) + 1;
+    depth[index] = thisDepth;
+    return thisDepth;
+  }
+
+  for (let i = 0; i < nodes.length; i++) {
+    if (nodes[i] > -1 && depth[i] === 0) {
+      depth[i] = checkDepth(i);
+    }
+  }
+
+  console.log(depth);
+
+  return Math.max(...depth) + 1;
+}
+
+const l =  [-1, 8, 6, 0, 7, 3, 8, 9, -1, 6] ;
+console.log(getTreeHeight(l));
+
+// def getTreeHeight(nodes):
+//     depth = [0] * len(nodes)
+
+//     def checkDepth(index):
+//         if index == -1:
+//             return 0
+//         if depth[index] > 0:
+//             return depth[index]
+
+//         nextIdx = nodes[index]
+//         if nextIdx == -1:
+//             depth[index] = 0
+//             return 0
+
+//         thisDepth = checkDepth(nextIdx) + 1
+//         depth[index] = thisDepth
+//         return thisDepth
+
+//     for i in range(len(nodes)):
+//         if nodes[i] > -1 and depth[i] == 0:
+//             depth[i] = checkDepth(i)
+
+//     print(depth)
+
+//     return max(depth) + 1
+
+// l = [-1, 8, 6, 0, 7, 3, 8, 9, -1, 6]
+// print(getTreeHeight(l))

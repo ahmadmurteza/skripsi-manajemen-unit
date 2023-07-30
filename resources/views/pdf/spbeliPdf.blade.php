@@ -18,7 +18,7 @@
     }
 </style>
 <body>
-    <img src="{{ public_path('assets/img/elements/2.ico') }}" alt="" style="position: absolute; margin-left: 40px;">
+    <img src="{{ public_path('assets/img/icons/download.png') }}" alt="" style="position: absolute; margin-left: 40px; height: 50px; width: 50px;">
     <div style="text-align:center; margin-left: 100px; margin-bottom: 25px;">
         <h2 style="margin: 0;">PT. Borneo Indobara</h2>
         <span style="margin: 0;">Angsana, Kec. Angsana, Kabupaten Tanah Bumbu, Kalimantan Selatan</span>
