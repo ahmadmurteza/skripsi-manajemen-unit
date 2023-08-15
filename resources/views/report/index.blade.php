@@ -46,20 +46,31 @@
                         <td>{{ $report->pengadu }}</td>
                         <td>{{ $report->kerusakan }}</td>
                         <td>
-                            <select class="form-select" aria-label="Default select example" onchange="changePriority({{ $report->id }})" id="priority{{ $report->id }}">
-                                <option value="rendah"{{ $report->prioritas == "rendah" ? ' selected' : '' }}>rendah</option>
-                                <option value="sedang"{{ $report->prioritas == "sedang" ? ' selected' : '' }}>sedang</option>
-                                <option value="tinggi"{{ $report->prioritas == "tinggi" ? ' selected' : '' }}>tinggi</option>
-                            </select>
-                            <p style="visibility: hidden;">ssssssssssssssss</p>
-                        </td>
-                        <td>
                             @if ($report->status == 'selesai')
                             <span class="badge bg-primary">{{ $report->status }}</span>
                             @elseif($report->status == 'proses')
                             <span class="badge bg-warning">{{ $report->status }}</span>
                             @else
                             <span class="badge bg-secondary">{{ $report->status }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if (auth()->user()->role == 'operator' || auth()->user()->role == 'mekanik')
+                                @if ($report->prioritas == 'tinggi')
+                                <span class="badge bg-primary">{{ $report->prioritas }}</span>
+                                @elseif($report->prioritas == 'sedang')
+                                <span class="badge bg-warning">{{ $report->prioritas }}</span>
+                                @else
+                                <span class="badge bg-secondary">{{ $report->prioritas }}</span>
+                                @endif
+                            @endif
+                            @if (auth()->user()->role == 'planner')
+                            <select class="form-select" aria-label="Default select example" onchange="changePriority({{ $report->id }})" id="priority{{ $report->id }}">
+                                <option value="rendah"{{ $report->prioritas == "rendah" ? ' selected' : '' }}>rendah</option>
+                                <option value="sedang"{{ $report->prioritas == "sedang" ? ' selected' : '' }}>sedang</option>
+                                <option value="tinggi"{{ $report->prioritas == "tinggi" ? ' selected' : '' }}>tinggi</option>
+                            </select>
+                            <p style="visibility: hidden;">ssssssssssssssss</p>
                             @endif
                         </td>
                         <td><img src="{{ asset("storage/" . substr($report->foto_insiden, 7)) }}" width="100" height="100"></td>
@@ -69,12 +80,15 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('report.show', $report->id) }}"><i class="bx bx-show-alt me-1"></i> Tampilkan</a>
+                            @if (auth()->user()->role == 'planner')
                             <a class="dropdown-item" href="{{ route('report.edit', $report->id) }}"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                             <form action="{{ route('report.delete', $report->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="dropdown-item"><i class="bx bx-trash me-1"></i> Delete</button>
                             </form>
+                            @endif
                             </div>
                         </div>
                         </td>
@@ -89,19 +103,20 @@
   <script>
    
     function changePriority(id) {
-        status = $('priority'+id).val();
-        alert('priority'+id)
+        status = $('#priority'+id).val();
+        alert(status);
+        alert('Perubahan prioritas dilakukan')
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
         });
         $.ajax({ 
            type: "POST", 
            url: "{{route('report.priority')}}",               
            data:{id:id, status: status},
            success: function(result) {
-            console.log('donde');
+            console.log(result);
            }
        });
     }

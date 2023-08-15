@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\MasterUnit;
 use App\Models\Location;
 use App\Models\Report;
+use App\Models\Discus;
+use App\Models\User;
 
 class ReportController extends Controller
 {
@@ -99,8 +101,27 @@ class ReportController extends Controller
 
     public function priority(Request $request) {
         $report = Report::find($request->id);
-        $report->status = $request->status;
+        $report->prioritas = $request->status;
         $report->save();
         return $report;
+    }
+
+    public function show($id) {
+        $ticket = Report::find($id);
+        $discus = Discus::where('ticket_id', $ticket->id)->get();
+        foreach ($discus as $index => $item) {
+            $discus[$index]['user'] = User::find($item->user_id);
+        }
+        return view('report.show', compact('ticket', 'discus'));
+    }
+
+    public function discus(Request $request) {
+        Discus::create([
+            'ticket_id' => $request->ticket_id,
+            'user_id' => auth()->user()->id,
+            'deskripsi' => $request->deskripsi,
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil menambah diskusi baru');
     }
 }

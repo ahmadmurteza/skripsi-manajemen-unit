@@ -46,7 +46,6 @@
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="role" required>
                     <option selected="">Pilih Salah Satu</option>
-                    <option value="ho">HO</option>
                     <option value="planner">Planner</option>
                     <option value="mekanik">Mekanik</option>
                     <option value="operator">Operator</option>

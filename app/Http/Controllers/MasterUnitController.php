@@ -24,6 +24,21 @@ class MasterUnitController extends Controller
         return view('master_unit.index', compact('units'));
     }
 
+    public function semua() {
+        $units = MasterUnit::join('lokasi', 'master_unit.lokasi_id', '=', 'lokasi.id')
+        ->join('service', 'master_unit.hm_service_id', '=', 'service.id')
+        ->select(
+            'master_unit.*',
+            'lokasi.nama_lokasi',
+            'service.hm AS hm_triger'
+        )
+        ->get();
+
+
+        return $units;
+    }
+
+
     public function create() {
         $services = Service::all();
         $locations = Location::all();
@@ -73,5 +88,42 @@ class MasterUnitController extends Controller
     public function delete($id) {
         MasterUnit::find($id)->delete();
         return redirect()->route('unit')->with('success', 'Berhasil menghapus unit');
+    }
+
+    public function pakai() {
+        $units = MasterUnit::join('lokasi', 'master_unit.lokasi_id', '=', 'lokasi.id')
+        ->join('service', 'master_unit.hm_service_id', '=', 'service.id')
+        ->select(
+            'master_unit.*',
+            'lokasi.nama_lokasi',
+            'service.hm AS hm_triger'
+        )
+        ->get();
+
+        $locations = Location::all();
+
+        return view('master_unit.pakai', compact('units', 'locations'));
+    }
+
+    public function info(Request $request) {
+
+        $unit = MasterUnit::find($request->id);
+        
+        $unit->status = "run";
+        $unit->longitude = $request->long;
+        $unit->latitude = $request->lat;
+        $unit->save();
+        return $unit;
+    }
+
+    public function keluar(Request $request) {
+
+        $unit = MasterUnit::find($request->id);
+        $unit->status = "ready";
+        $unit->longitude = $request->lat;
+        $unit->latitude = $request->long;
+        $unit->hm = $request->hm;
+        $unit->save();
+        return $unit;
     }
 }

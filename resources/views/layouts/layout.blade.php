@@ -8,6 +8,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="" />
 
     <!-- Favicon -->
@@ -122,93 +123,129 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    <li class="menu-item{{ (request()->is('home')) ? ' active' : '' }}">
-                        <a href="{{ route('home') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                            <div data-i18n="Analytics">Dashboard</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item{{ (request()->is('announcement')) ? ' active' : '' }}">
-                        <a href="{{ route('announcement') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-label"></i>
-                            <div data-i18n="Analytics">Pemberitahuan</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item{{ Request::is('user/*') || Request::is('user') ? ' active' : '' }}">
-                        <a href="{{ route('user') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                            <div data-i18n="Analytics">Manajemen User</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item{{ Request::is('location/*') || Request::is('location') ? ' active' : '' }}">
-                        <a href="{{ route('location') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-current-location"></i>
-                            <div data-i18n="Analytics">Manajemen Lokasi</div>
-                        </a>
-                    </li>
+                    @if(empty(auth()->user()) )
                     
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-wrench"></i>
-                            <div data-i18n="Layouts">Manajemen Sparepart</div>
+                    <li class="menu-item{{ (request()->is('unit.update.location')) ? ' active' : '' }}">
+                        <a href="{{ route('unit.update.location') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Menu Pelaporan</div>
                         </a>
+                    </li>
+                    <li class="menu-item{{ (request()->is('report.operator')) ? ' active' : '' }}">
+                        <a href="{{ route('report') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-list-check"></i>
+                            <div data-i18n="Analytics">Data Pelaporan</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ (request()->is('unit.pakai')) ? ' active' : '' }}">
+                        <a href="{{ route('unit.pakai') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-run"></i>
+                            <div data-i18n="Analytics">Pemakaian Unit</div>
+                        </a>
+                    </li>
+                    @endif
+                    {{-- @if(empty(auth()->user()) && auth()->user()->role != 'operator') --}}
+                    @if(!empty(auth()->user()))
+                        @if (auth()->user()->role == "mekanik")
+                        <li class="menu-item{{ (request()->is('report')) ? ' active' : '' }}">
+                            <a href="{{ route('report') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Kerusakan</div>
+                            </a>
+                        </li>
+                        @endif
+                        @if (auth()->user()->role == "planner")
+                            
                         
+                        <li class="menu-item{{ (request()->is('home')) ? ' active' : '' }}">
+                            <a href="{{ route('home') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                                <div data-i18n="Analytics">Dashboard</div>
+                            </a>
+                        </li>
 
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('warehouse') }}" class="menu-link">
-                                    <div data-i18n="Without menu">Gudang Sparepart</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('sparepart-beli') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Pembelian Sparepart</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('sparepart-pakai') }}" class="menu-link">
-                                    <div data-i18n="Container">Penggunaan Sparepart</div>
-                                </a>
-                            </li>
+                        <li class="menu-item{{ (request()->is('announcement')) ? ' active' : '' }}">
+                            <a href="{{ route('announcement') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-label"></i>
+                                <div data-i18n="Analytics">Pemberitahuan</div>
+                            </a>
+                        </li>
 
-                        </ul>
-                    </li>
+                        <li class="menu-item{{ Request::is('user/*') || Request::is('user') ? ' active' : '' }}">
+                            <a href="{{ route('user') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                                <div data-i18n="Analytics">Manajemen User</div>
+                            </a>
+                        </li>
 
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Manajemen Unit</div>
-                        </a>
+                        <li class="menu-item{{ Request::is('location/*') || Request::is('location') ? ' active' : '' }}">
+                            <a href="{{ route('location') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-current-location"></i>
+                                <div data-i18n="Analytics">Manajemen Lokasi</div>
+                            </a>
+                        </li>
+                        
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-wrench"></i>
+                                <div data-i18n="Layouts">Manajemen Sparepart</div>
+                            </a>
+                            
 
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('unit') }}" class="menu-link">
-                                    <div data-i18n="Without menu">Daftar Unit</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('report') }}" class="menu-link">
-                                    <div data-i18n="Without menu">Laporan Kerusakan</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="{{ route('service') }}" class="menu-link">
-                                    <div data-i18n="Without navbar">Service Berkala</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="{{ route('warehouse') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Gudang Sparepart</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('sparepart-beli') }}" class="menu-link">
+                                        <div data-i18n="Without navbar">Pembelian Sparepart</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('sparepart-pakai') }}" class="menu-link">
+                                        <div data-i18n="Container">Penggunaan Sparepart</div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                                <i class="menu-icon tf-icons bx bx-layout"></i>
+                                <div data-i18n="Layouts">Manajemen Unit</div>
+                            </a>
+
+                            <ul class="menu-sub">
+                                <li class="menu-item">
+                                    <a href="{{ route('unit') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Daftar Unit</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('report') }}" class="menu-link">
+                                        <div data-i18n="Without menu">Laporan Kerusakan</div>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="{{ route('service') }}" class="menu-link">
+                                        <div data-i18n="Without navbar">Service Berkala</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
 
-                    <li class="menu-item{{ (request()->is('pdf')) ? ' active' : '' }}">
-                        <a href="{{ route('pdf') }}" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-file"></i>
-                            <div data-i18n="Analytics">Cetak</div>
-                        </a>
-                    </li>
+                        <li class="menu-item{{ (request()->is('pdf')) ? ' active' : '' }}">
+                            <a href="{{ route('pdf') }}" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-file"></i>
+                                <div data-i18n="Analytics">Cetak</div>
+                            </a>
+                        </li>
+                        @endif
+                    @endif
                 </ul>
             </aside>
             <!-- / Menu -->
@@ -235,7 +272,7 @@
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                        <img src="../assets/img/avatars/8.jpeg" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -244,11 +281,18 @@
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                        <img src="../assets/img/avatars/8.jpeg" alt class="w-px-40 h-auto rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
+                                                    <span class="fw-semibold d-block">
+                                                        @if (empty(auth()->user()))
+                                                            Operator
+                                                        @endif
+                                                        @if (!empty(auth()->user()))
+                                                        {{ auth()->user()->name || "Operator" }}
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </div>
                                         </a>

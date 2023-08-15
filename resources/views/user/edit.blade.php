@@ -50,7 +50,6 @@
                 >
                 <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example" name="role" required>
                     <option disabled>Pilih Salah Satu</option>
-                    <option value="ho"{{ $user->location == "ho" ? " selected" : "" }}>HO</option>
                     <option value="planner"{{ $user->location == "planner" ? " selected" : "" }}>Planner</option>
                     <option value="mekanik"{{ $user->location == "mekanik" ? " selected" : "" }}>Mekanik</option>
                     <option value="operator"{{ $user->location == "operator" ? " selected" : "" }}>Operator</option>

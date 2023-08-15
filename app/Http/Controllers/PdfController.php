@@ -19,7 +19,14 @@ class PdfController extends Controller
     }
 
     public function printUnit() {
-        $units = MasterUnit::get();
+        $units = MasterUnit::join('lokasi', 'master_unit.lokasi_id', '=', 'lokasi.id')
+        ->join('service', 'master_unit.hm_service_id', '=', 'service.id')
+        ->select(
+            'master_unit.*',
+            'lokasi.nama_lokasi',
+            'service.hm AS hm_triger'
+        )
+        ->get();
         $pdf = PDF::loadView('pdf.unitPdf', ['units'=>$units]);
      
         return $pdf->stream();

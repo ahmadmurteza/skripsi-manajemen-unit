@@ -455,37 +455,37 @@
 // console.log(getTreeHeight(l));
 
 
-function getTreeHeight(nodes) {
-  const depth = new Array(nodes.length).fill(0);
+// function getTreeHeight(nodes) {
+//   const depth = new Array(nodes.length).fill(0);
 
-  function checkDepth(index) {
-    if (index === -1) return 0;
-    if (depth[index] > 0) return depth[index];
+//   function checkDepth(index) {
+//     if (index === -1) return 0;
+//     if (depth[index] > 0) return depth[index];
 
-    const nextIdx = nodes[index];
-    if (nextIdx === -1) {
-      depth[index] = 0;
-      return 0;
-    }
+//     const nextIdx = nodes[index];
+//     if (nextIdx === -1) {
+//       depth[index] = 0;
+//       return 0;
+//     }
 
-    const thisDepth = checkDepth(nextIdx) + 1;
-    depth[index] = thisDepth;
-    return thisDepth;
-  }
+//     const thisDepth = checkDepth(nextIdx) + 1;
+//     depth[index] = thisDepth;
+//     return thisDepth;
+//   }
 
-  for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i] > -1 && depth[i] === 0) {
-      depth[i] = checkDepth(i);
-    }
-  }
+//   for (let i = 0; i < nodes.length; i++) {
+//     if (nodes[i] > -1 && depth[i] === 0) {
+//       depth[i] = checkDepth(i);
+//     }
+//   }
 
-  console.log(depth);
+//   console.log(depth);
 
-  return Math.max(...depth) + 1;
-}
+//   return Math.max(...depth) + 1;
+// }
 
-const l =  [-1, 8, 6, 0, 7, 3, 8, 9, -1, 6] ;
-console.log(getTreeHeight(l));
+// const l =  [-1, 8, 6, 0, 7, 3, 8, 9, -1, 6] ;
+// console.log(getTreeHeight(l));
 
 // def getTreeHeight(nodes):
 //     depth = [0] * len(nodes)
@@ -515,3 +515,20 @@ console.log(getTreeHeight(l));
 
 // l = [-1, 8, 6, 0, 7, 3, 8, 9, -1, 6]
 // print(getTreeHeight(l))
+
+
+let f = (a, b) => {
+  return a % b;
+}
+
+let result =0;
+for (let i = 1; i <= 10; i++) {
+  if (f(i, 2) == 0) {
+    result = result + i;
+  } else {
+    result = result - i;
+  } 
+  
+}
+
+console.log(result);

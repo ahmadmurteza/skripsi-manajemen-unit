@@ -234,6 +234,9 @@
                   <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
                 </div>
               </form>
+              <hr>
+              <a href="{{ route('unit.update.location') }}" class="btn btn-danger">Lapor Unit Rusak</a>
+              <a href="{{ route('unit.pakai') }}" class="btn btn-warning">Pakai Unit</a>
             </div>
           </div>
           <!-- /Register -->

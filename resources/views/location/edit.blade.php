@@ -45,6 +45,20 @@
                         />
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="basic-default-fullname"
+                            >Radius (Meter)</label
+                        >
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="radius"
+                            placeholder="10000, 20000, .."
+                            name="radius"
+                            value="{{ $location->radius }}"
+                            required
+                        />
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label" for="basic-default-email"
                             >Longitude</label
                         >

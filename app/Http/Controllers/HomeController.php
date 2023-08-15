@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function index()
     {
@@ -61,15 +61,16 @@ class HomeController extends Controller
         $unit = MasterUnit::find($request->master_unit_id);
         $unit->longitude = $request->longitude;
         $unit->latitude = $request->latitude;
+        $unit->status = 'breakdown';
         $unit->save();
 
         $users = User::where('role', 'planner')->get();
-        // foreach ($users as $user) {
-        //     Http::post('http://localhost:8080/message', [
-        //         'phoneNumber' => $user->no_wa,
-        //         'message' => 'Laporan kerusakan unit '. $unit->nomer_lambung . '. Cek APUR untuk melihat detail kerusakan'
-        //     ]);
-        // }
+        foreach ($users as $user) {
+            Http::post('http://localhost:8080/message', [
+                'phoneNumber' => $user->no_wa,
+                'message' => 'Laporan kerusakan unit '. $unit->nomer_lambung . '. Cek APUR untuk melihat detail kerusakan'
+            ]);
+        }
 
         Announcement::create([
             "deskripsi" => "Pemberitahuan unit ". $unit->nomer_lambung ." dengan kerusakan ". $request->kerusakan ."telah dikirim kesemua planner"
