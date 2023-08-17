@@ -122,4 +122,12 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/pdf/rusak', [App\Http\Controllers\PdfController::class, 'printRusak'])->name('pdf.rusak');
 
 
+    Route::get('/pasien', [App\Http\Controllers\PasienController::class, 'index'])->name('pasien');
+    Route::get('/cetak', [App\Http\Controllers\PasienController::class, 'cetak'])->name('pasien.cetak');
+    Route::get('/pasien/create', [App\Http\Controllers\PasienController::class, 'create'])->name('pasien.create');
+    Route::post('/pasien/store', [App\Http\Controllers\PasienController::class, 'store'])->name('pasien.store');
+    Route::get('/pasien/edit/{id}', [App\Http\Controllers\PasienController::class, 'edit'])->name('pasien.edit');
+    Route::put('/pasien/update/{id}', [App\Http\Controllers\PasienController::class, 'update'])->name('pasien.update');
+    Route::delete('/pasien/delete/{id}', [App\Http\Controllers\PasienController::class, 'delete'])->name('pasien.delete');
+    
 });

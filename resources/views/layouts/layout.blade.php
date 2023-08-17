@@ -123,7 +123,7 @@
                 <div class="menu-inner-shadow"></div>
 
                 <ul class="menu-inner py-1">
-                    @if(empty(auth()->user()) )
+                    @if(empty(auth()->user()))
                     
                     <li class="menu-item{{ (request()->is('unit.update.location')) ? ' active' : '' }}">
                         <a href="{{ route('unit.update.location') }}" class="menu-link">
@@ -131,12 +131,12 @@
                             <div data-i18n="Analytics">Menu Pelaporan</div>
                         </a>
                     </li>
-                    <li class="menu-item{{ (request()->is('report.operator')) ? ' active' : '' }}">
+                    {{-- <li class="menu-item{{ (request()->is('report.operator')) ? ' active' : '' }}">
                         <a href="{{ route('report') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-list-check"></i>
                             <div data-i18n="Analytics">Data Pelaporan</div>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="menu-item{{ (request()->is('unit.pakai')) ? ' active' : '' }}">
                         <a href="{{ route('unit.pakai') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-run"></i>
@@ -246,6 +246,13 @@
                         </li>
                         @endif
                     @endif
+
+                    <li class="menu-item{{ (request()->is('pasien')) ? ' active' : '' }}">
+                        <a href="{{ route('pasien') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Pasien</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <!-- / Menu -->
